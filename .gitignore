@@ -1,0 +1,8 @@
+.project-roadmap.md
+node_modules/
+.env
+.env.example
+.DS_Store
+books/
+output/
+tmp/
