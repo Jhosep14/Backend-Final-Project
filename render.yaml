@@ -1,0 +1,16 @@
+services:
+  - type: web
+    runtime: node
+    name: Backend-Final-Project
+    repo: https://github.com/Jhosep14/Backend-Final-Project.git
+    buildCommand: npm install && npm run css:build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
