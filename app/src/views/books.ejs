@@ -1,0 +1,55 @@
+<%- include("partials/header") %>
+<%
+  const displayBooks = typeof books !== "undefined" ? books : [];
+  const displayAllBooks = typeof allBooks !== "undefined" ? allBooks : [];
+  const displaySeries = typeof series !== "undefined" ? series : [];
+  const selectedSeries = typeof activeSeries !== "undefined" ? activeSeries : "All";
+  const searchTerm = typeof search !== "undefined" ? search : "";
+%>
+
+<main class="library-page wrap">
+  <section class="library-intro" aria-labelledby="page-heading">
+    <div>
+      <p class="section-label">THE ENGLISH LAND LIBRARY</p>
+      <h1 id="page-heading">Books & resources<span>.</span></h1>
+      <p>Find a book for wherever you are in your English journey.</p>
+    </div>
+    <form class="search-form" action="/book" method="get" role="search">
+      <% if (selectedSeries !== "All") { %><input type="hidden" name="series" value="<%= selectedSeries %>"><% } %>
+      <label class="sr-only" for="book-search">Search books</label>
+      <input id="book-search" name="q" type="search" placeholder="Search by title or level" value="<%= searchTerm %>">
+      <button type="submit" aria-label="Search books"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg></button>
+    </form>
+  </section>
+
+  <div class="library-layout">
+    <aside class="filters" aria-label="Filter books by series">
+      <p class="filter-heading">BROWSE BY SERIES</p>
+      <div class="filter-list">
+        <% displaySeries.forEach((item) => { const count = item === "All" ? displayAllBooks.length : displayAllBooks.filter((book) => book.series === item).length; %>
+          <a class="filter-link <%= item === selectedSeries ? 'is-active' : '' %>" href="/book?series=<%= encodeURIComponent(item) %><%= searchTerm ? '&q=' + encodeURIComponent(searchTerm) : '' %>" <%= item === selectedSeries ? 'aria-current=page' : '' %>><span><%= item === "All" ? "All books" : item %></span><span class="filter-count"><%= count %></span></a>
+        <% }) %>
+      </div>
+      <div class="filter-note"><strong>One page at a time.</strong><p>Pick a level, find a book, and keep going.</p></div>
+    </aside>
+
+    <section class="catalogue" aria-labelledby="results-heading">
+      <div class="catalogue-heading"><h2 id="results-heading">The collection</h2><p><%= displayBooks.length %> <%= displayBooks.length === 1 ? 'book' : 'books' %></p></div>
+      <% if (displayBooks.length) { %>
+        <div class="book-grid">
+          <% displayBooks.forEach((book) => { %>
+            <article class="book-card">
+              <div class="book-image"><span class="book-series"><%= book.series %></span><span class="book-level"><%= book.level %></span><img src="<%= book.cover %>" alt="Cover of <%= book.title %>" loading="lazy"></div>
+              <div class="book-card-body"><p class="book-type"><%= book.subtitle %></p><h3><%= book.title %></h3><p class="book-availability">Reading access coming soon</p></div>
+            </article>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div class="empty-state"><h3>No books to show yet.</h3><p>Books will appear here when the library is connected.</p></div>
+      <% } %>
+    </section>
+  </div>
+</main>
+
+<%- include("partials/footer") %>
+

@@ -1,1 +1,10 @@
 @import "tailwindcss";
+@import "./partials/base.css";
+@import "./partials/header.css";
+@import "./partials/home-hero.css";
+@import "./partials/buttons.css";
+@import "./partials/home.css";
+@import "./partials/books.css";
+@import "./partials/profile.css";
+@import "./partials/footer.css";
+@import "./partials/responsive.css";

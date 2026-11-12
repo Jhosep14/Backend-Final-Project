@@ -1,0 +1,46 @@
+@media (max-width: 850px) {
+  .wrap, .hero-inner { width: min(100% - 40px, 1280px); }
+  body > header { padding: 0 20px; }
+  .hero-inner { min-height: 500px; gap: 20px; }
+  .hero-art { min-height: 400px; }
+  .hero-cover { height: 260px; }
+  .home-books { grid-template-columns: repeat(2, 1fr); }
+  .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .library-layout { grid-template-columns: 205px minmax(0, 1fr); gap: 18px; }
+}
+@media (max-width: 560px) {
+  body > header { min-height: 68px; gap: 12px; flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+  body > header nav { gap: 15px; }
+  body > header nav a { font-size: .78rem; }
+  body > header nav a:last-child { padding: 7px 10px; }
+  .brand { font-size: 1rem; }
+  .brand::before { width: 31px; height: 31px; margin-right: 7px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 0; }
+  .hero-copy { padding: 62px 0 10px; }
+  .hero h1 { font-size: clamp(3.8rem, 15vw, 5rem); }
+  .hero-art { min-height: 320px; }
+  .hero-orbit { width: 280px; }
+  .hero-cover { height: 210px; }
+  .hero-note { bottom: 35px; right: 5px; }
+  .home-library { padding-top: 65px; padding-bottom: 70px; }
+  .section-heading { align-items: start; flex-direction: column; }
+  .home-books { gap: 12px; margin-top: 28px; }
+  .home-book-cover { height: 220px; padding: 16px; }
+  .library-intro { align-items: start; flex-direction: column; padding: 27px 22px; }
+  .search-form { width: 100%; max-width: none; }
+  .library-layout { grid-template-columns: 1fr; }
+  .filters { padding: 18px; }
+  .filter-list { display: flex; flex-wrap: wrap; }
+  .filter-link { gap: 8px; }
+  .filter-note { display: none; }
+  .book-grid { gap: 12px; }
+  .book-card { padding: 9px; }
+  .book-image { height: 180px; padding: 12px; }
+  .book-series, .book-level { font-size: .7rem; padding: 4px; }
+  .book-card h3 { font-size: .86rem; }
+  .book-availability { font-size: .72rem; }
+  .footer-inner { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

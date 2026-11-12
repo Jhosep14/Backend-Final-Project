@@ -9,5 +9,5 @@ app.listen(port, "0.0.0.0", (error) => {
     return;
   }
 
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}/home`);
 });

@@ -1,0 +1,4 @@
+.button { @apply inline-flex items-center; gap: 40px; min-height: 54px; padding: 0 23px; border-radius: 99px; font-weight: 700; font-size: .91rem; transition: transform .2s, background .2s; }
+.button:hover { transform: translateY(-2px); }
+.button-dark { color: white; background: var(--ink); }
+.button-dark:hover { background: #394344; }
