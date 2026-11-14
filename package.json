@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch server.js",
+    "dev": "concurrently \"node --watch server.js\" \"npm run css:watch\" \"browser-sync start --proxy 'localhost:3000' --port 3001 --files 'public/**/*, app/src/views/**/*.ejs' --reload-delay 100 --no-open\"",
     "start": "node server.js",
     "css:watch": "npx @tailwindcss/cli -i ./app/src/style/main.css -o ./public/css/output.css --watch",
     "css:build": "npx @tailwindcss/cli -i ./app/src/style/main.css -o ./public/css/output.css"
@@ -25,6 +25,8 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.7",
     "tailwindcss": "^4.3.3"
   }
 }

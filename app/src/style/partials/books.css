@@ -10,11 +10,11 @@
 .search-form button { padding: 0 14px; color: white; background: transparent; border: 0; cursor: pointer; }
 .search-form svg { width: 20px; height: 20px; }
 .library-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); align-items: start; gap: 28px; margin-top: 28px; }
-.filters { background: var(--contrast); border: 1px solid #29292c; border-radius: 14px; padding: 23px; }
+.filters { background: var(--surface); border: 1px solid #29292c; border-radius: 14px; padding: 23px; }
 .filter-heading { color: #c6c3c5; margin: 0 0 18px; }
 .filter-list { display: grid; gap: 7px; }
-.filter-link { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 8px; color: #eee; font-size: .88rem; font-weight: 700; }
-.filter-link:hover { background: #303034; }
+.filter-link { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 8px; color: black; font-size: .88rem; font-weight: 700; background-color: white; }
+.filter-link:hover { background: var(--contrast); } 
 .filter-link.is-active { color: #17130c; background: var(--accent); }
 .filter-count { display: grid; place-items: center; min-width: 25px; height: 23px; border-radius: 99px; background: #353538; color: #f7f5f0; font-size: .72rem; }
 .is-active .filter-count { background: #d78600; color: #1a1300; }

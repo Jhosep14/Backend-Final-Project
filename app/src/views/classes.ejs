@@ -1,0 +1,75 @@
+<%- include("partials/header") %>
+<%
+  const displayClasses = typeof classes !== "undefined" ? classes : [];
+  const displayAllClasses = typeof allClasses !== "undefined" ? allClasses : [];
+  const displayLevels = typeof levels !== "undefined" ? levels : [];
+  const selectedLevel = typeof activeLevel !== "undefined" ? activeLevel : "All";
+  const searchTerm = typeof search !== "undefined" ? search : "";
+%>
+<main>
+    <div class="classes-banner">
+        <div class="classes-banner-content">
+            <img src="/image/logo-light.png" alt="" />
+            <h1>Classes</h1>
+        </div>
+    </div>
+    <div class="classes-container">
+        <aside class="class-filter">
+            <p class="filter-title">Browse by Level</p>
+            <div class="filter-list">
+                <% displayLevels.forEach((item) => { 
+                    const count = item === "All" 
+                        ? displayAllClasses.length 
+                        : displayAllClasses.filter((c) => c.level === item).length; 
+                %>
+                    <a class="filter-link <%= item === selectedLevel ? 'is-active' : '' %>" 
+                       href="/classes?level=<%= encodeURIComponent(item) %><%= searchTerm ? '&q=' + encodeURIComponent(searchTerm) : '' %>" 
+                       <%= item === selectedLevel ? 'aria-current=page' : '' %>>
+                        <span><%= item === "All" ? "All Levels" : item %></span>
+                        <span class="filter-count"><%= count %></span>
+                    </a>
+                <% }) %>
+            </div>
+        </aside>
+        <section class="classes-list">
+          <div class="classes-grid">
+            <% if (displayClasses.length) { %>
+              <% displayClasses.forEach((item) => { %>
+                <article class="class-card">
+                  <div class="class-card-header">
+                    <span class="class-level-badge"><%= item.level %></span>
+                    <span class="class-card-price"><%= item.price %></span>
+                  </div>
+                  <div class="class-card-body">
+                    <h3 class="class-card-title"><%= item.level %></h3>
+                    <p class="class-card-teacher"><strong>Teacher:</strong> <%= item.teacher %></p>
+                    <p class="class-card-duration"><strong>Duration:</strong> <%= item.duration %></p>
+                    <p class="class-card-dates"><strong>Dates:</strong> <%= item.startDate %> to <%= item.endDate %></p>
+                    
+                    <% if (Array.isArray(item.schedule) && item.schedule.length) { %>
+                      <div class="class-card-schedule">
+                        <strong>Schedule:</strong>
+                        <ul>
+                          <% item.schedule.forEach((s) => { %>
+                            <li><span><%= s.day %>:</span> <span><%= s.time %></span></li>
+                          <% }) %>
+                        </ul>
+                      </div>
+                    <% } %>
+                  </div>
+                </article>
+              <% }) %>
+            <% } else { %>
+              <div class="empty-state">
+                <h3>No classes found</h3>
+                <p>Try selecting another level or clearing your filter.</p>
+                <a href="/classes">Show all classes</a>
+              </div>
+            <% } %>
+          </div>
+        </section>
+
+    </div>
+
+</main>
+<%- include("partials/footer") %>
