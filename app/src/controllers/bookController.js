@@ -1,23 +1,31 @@
-import { findBooks, getAllBooks } from "../models/bookModel.js";
+import { findBooks, getAllBooks, getBookById } from "../models/bookModel.js";
+import supabase from "../db/supabase.js"
 
-export function showBooks(req, res) {
+export async function showBooks(req, res) {
   const { search, series: requestedSeries } = res.locals.bookFilters;
 
-  // Get the current books and create the list of available series.
-  const allBooks = getAllBooks();
-  const series = ["All", ...new Set(allBooks.map((book) => book.series))];
+  // Wait for PostgreSQL before preparing the page.
+  const allBooks = await getAllBooks();
 
-  // Use "All" if the requested series does not exist.
+  const series = [
+    "All",
+    ...new Set(allBooks.map((book) => book.series).filter(Boolean)),
+  ];
+
   const activeSeries = series.includes(requestedSeries)
     ? requestedSeries
     : "All";
 
-  const books = findBooks({
+
+
+    
+
+  // Filter the records already retrieved from PostgreSQL.
+  const books = findBooks(allBooks, {
     search,
     series: activeSeries,
   });
 
-  // Pass the values your existing books.ejs expects.
   res.render("books", {
     title: "Books",
     books,

@@ -7,22 +7,22 @@
   const searchTerm = typeof search !== "undefined" ? search : "";
 %>
 
-<main class="library-page wrap">
+<main class="wrap min-h-[70vh] pt-8 pb-25">
   <section class="library-intro" aria-labelledby="page-heading">
     <div>
       <p class="section-label">THE ENGLISH LAND LIBRARY</p>
       <h1 id="page-heading">Books & resources<span>.</span></h1>
       <p>Find a book for wherever you are in your English journey.</p>
     </div>
-    <form class="search-form" action="/book" method="get" role="search">
+    <form class="search-form flex" action="/book" method="get" role="search">
       <% if (selectedSeries !== "All") { %><input type="hidden" name="series" value="<%= selectedSeries %>"><% } %>
       <label class="sr-only" for="book-search">Search books</label>
       <input id="book-search" name="q" type="search" placeholder="Search by title or level" value="<%= searchTerm %>">
-      <button type="submit" aria-label="Search books"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg></button>
+      <button type="submit" aria-label="Search books"><svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg></button>
     </form>
   </section>
 
-  <div class="library-layout">
+  <div class="library-layout mt-7 grid items-start">
     <aside class="filters" aria-label="Filter books by series">
       <p class="filter-heading">BROWSE BY SERIES</p>
       <div class="filter-list">
@@ -36,11 +36,18 @@
     <section class="catalogue" aria-labelledby="results-heading">
       <div class="catalogue-heading"><h2 id="results-heading">The collection</h2><p><%= displayBooks.length %> <%= displayBooks.length === 1 ? 'book' : 'books' %></p></div>
       <% if (displayBooks.length) { %>
-        <div class="book-grid">
+        <div class="book-grid grid">
           <% displayBooks.forEach((book) => { %>
-            <article class="book-card">
-              <div class="book-image"><span class="book-series"><%= book.series %></span><span class="book-level"><%= book.level %></span><img src="<%= book.cover %>" alt="Cover of <%= book.title %>" loading="lazy"></div>
-              <div class="book-card-body"><p class="book-type"><%= book.subtitle %></p><h3><%= book.title %></h3><p class="book-availability">Reading access coming soon</p></div>
+            <article class="book-card min-w-0">
+              <div class="book-image relative flex items-center justify-center">
+                <span class="book-level"><%= book.level %></span>
+                <% if (book.cover) { %>
+                  <img class="max-h-full max-w-full object-contain" src="<%= book.cover %>" alt="Cover of <%= book.title %>" loading="lazy">
+                <% } else { %>
+                  <span class="text-sm text-neutral-400">Cover coming soon</span>
+                <% } %>
+              </div>
+              <div class="book-card-body"><h3><%= book.title %></h3><p class="book-availability">Reading access coming soon</p></div>
             </article>
           <% }) %>
         </div>

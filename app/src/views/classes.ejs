@@ -10,66 +10,74 @@
     <div class="classes-banner">
         <div class="classes-banner-content">
             <img src="/image/logo-light.png" alt="" />
-            <h1>Classes</h1>
+            <h1>Classes Schedule</h1>
         </div>
     </div>
-    <div class="classes-container">
-        <aside class="class-filter">
-            <p class="filter-title">Browse by Level</p>
-            <div class="filter-list">
-                <% displayLevels.forEach((item) => { 
-                    const count = item === "All" 
-                        ? displayAllClasses.length 
-                        : displayAllClasses.filter((c) => c.level === item).length; 
+    <div class="classes-layout wrap flex items-start gap-10 py-10">
+        <nav class="classes-filter flex-1/5 p-5" aria-labelledby="classes-filter-heading">
+            <h2 id="classes-filter-heading" class="mb-4 text-base font-semibold">Browse by Level</h2>
+            <ul class="classes-levels flex flex-wrap gap-2">
+                <% displayLevels.forEach((item) => {
+                    const count = item === "All"
+                        ? displayAllClasses.length
+                        : displayAllClasses.filter((c) => c.level === item).length;
                 %>
-                    <a class="filter-link <%= item === selectedLevel ? 'is-active' : '' %>" 
-                       href="/classes?level=<%= encodeURIComponent(item) %><%= searchTerm ? '&q=' + encodeURIComponent(searchTerm) : '' %>" 
-                       <%= item === selectedLevel ? 'aria-current=page' : '' %>>
-                        <span><%= item === "All" ? "All Levels" : item %></span>
-                        <span class="filter-count"><%= count %></span>
-                    </a>
+                    <li>
+                        <a class="class-filter-link flex items-center justify-between gap-2"
+                           href="/classes?level=<%= encodeURIComponent(item) %><%= searchTerm ? '&q=' + encodeURIComponent(searchTerm) : '' %>"
+                           <% if (item === selectedLevel) { %>aria-current="page"<% } %>>
+                            <span><%= item === "All" ? "All Levels" : item %></span>
+                            <span class="class-filter-count text-xs tabular-nums"><%= count %></span>
+                        </a>
+                    </li>
                 <% }) %>
-            </div>
-        </aside>
-        <section class="classes-list">
-          <div class="classes-grid">
+            </ul>
+        </nav>
+
+        <section class="min-w-0 flex-4/5" aria-labelledby="classes-results-heading">
+            <h2 id="classes-results-heading" class="sr-only">Class results</h2>
             <% if (displayClasses.length) { %>
-              <% displayClasses.forEach((item) => { %>
-                <article class="class-card">
-                  <div class="class-card-header">
-                    <span class="class-level-badge"><%= item.level %></span>
-                    <span class="class-card-price"><%= item.price %></span>
-                  </div>
-                  <div class="class-card-body">
-                    <h3 class="class-card-title"><%= item.level %></h3>
-                    <p class="class-card-teacher"><strong>Teacher:</strong> <%= item.teacher %></p>
-                    <p class="class-card-duration"><strong>Duration:</strong> <%= item.duration %></p>
-                    <p class="class-card-dates"><strong>Dates:</strong> <%= item.startDate %> to <%= item.endDate %></p>
-                    
-                    <% if (Array.isArray(item.schedule) && item.schedule.length) { %>
-                      <div class="class-card-schedule">
-                        <strong>Schedule:</strong>
-                        <ul>
-                          <% item.schedule.forEach((s) => { %>
-                            <li><span><%= s.day %>:</span> <span><%= s.time %></span></li>
-                          <% }) %>
-                        </ul>
-                      </div>
-                    <% } %>
-                  </div>
-                </article>
-              <% }) %>
+                <div class="classes-grid grid gap-4">
+                    <% displayClasses.forEach((item) => { %>
+                        <article class="class-card min-w-0 p-5">
+                            <header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+                                <h3 class="class-card-title text-xl font-semibold"><%= item.level %></h3>
+                                <p class="class-card-price text-sm font-semibold tabular-nums"><%= item.price %></p>
+                            </header>
+
+                            <dl class="class-details mt-5 grid gap-3 text-sm">
+                                <div><dt>Teacher</dt><dd><%= item.teacher %></dd></div>
+                                <div><dt>Duration</dt><dd><%= item.duration %></dd></div>
+                                <div class="col-span-full">
+                                    <dt>Dates</dt>
+                                    <dd><time datetime="<%= item.startDate %>"><%= item.startDate %></time> to <time datetime="<%= item.endDate %>"><%= item.endDate %></time></dd>
+                                </div>
+                            </dl>
+
+                            <% if (Array.isArray(item.schedule) && item.schedule.length) { %>
+                                <div class="class-card-schedule mt-5 pt-4 text-sm">
+                                    <h4 class="mb-2 font-semibold">Schedule</h4>
+                                    <ul>
+                                        <% item.schedule.forEach((s) => { %>
+                                            <li class="flex flex-wrap justify-between gap-x-3 gap-y-1 py-2">
+                                                <span><%= s.day %></span>
+                                                <span class="tabular-nums"><%= s.time %></span>
+                                            </li>
+                                        <% }) %>
+                                    </ul>
+                                </div>
+                            <% } %>
+                        </article>
+                    <% }) %>
+                </div>
             <% } else { %>
-              <div class="empty-state">
-                <h3>No classes found</h3>
-                <p>Try selecting another level or clearing your filter.</p>
-                <a href="/classes">Show all classes</a>
-              </div>
+                <div class="class-card p-6">
+                    <h3 class="text-xl font-semibold">No classes found</h3>
+                    <p class="class-empty-message mb-4 mt-2">Try selecting another level or clearing your filter.</p>
+                    <a class="class-reset font-semibold underline underline-offset-4" href="/classes">Show all classes</a>
+                </div>
             <% } %>
-          </div>
         </section>
-
     </div>
-
 </main>
 <%- include("partials/footer") %>

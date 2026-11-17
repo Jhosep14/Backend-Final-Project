@@ -1,0 +1,87 @@
+.classes-banner {
+  @apply w-full h-80 bg-[#5caebc] flex justify-center items-center;
+}
+
+.classes-banner-content {
+  @apply text-5xl font-bold flex items-center gap-5;
+}
+
+
+.classes-filter,
+.class-card {
+  background: var(--surface);
+  border: 1px solid #343438;
+  border-radius: 1rem;
+}
+
+.class-filter-link {
+  min-height: 44px;
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  background: var(--raised);
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.class-filter-link:hover {
+  background: #333338;
+}
+
+.class-filter-count {
+  min-width: 1.5rem;
+  padding: .125rem .35rem;
+  border-radius: 1rem;
+  background: var(--page);
+  color: var(--text);
+  text-align: center;
+}
+
+.class-filter-link[aria-current="page"] {
+  background: #5caebc;
+  color: #101b1d;
+}
+
+.class-card-title {
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+.class-card-price,
+.class-reset {
+  color: #9bd5de;
+}
+
+.class-details {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.class-details dt,
+.class-empty-message,
+.class-card-schedule li span:last-child {
+  color: var(--muted);
+}
+
+.class-details dd {
+  margin-top: .2rem;
+  overflow-wrap: anywhere;
+}
+
+.class-card-schedule {
+  border-top: 1px solid #343438;
+}
+
+@media (min-width: 48rem) {
+  .classes-layout {
+    grid-template-columns: 13rem minmax(0, 1fr);
+  }
+
+  .classes-levels {
+    display: grid;
+  }
+}
+
+@media (min-width: 64rem) {
+  .classes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

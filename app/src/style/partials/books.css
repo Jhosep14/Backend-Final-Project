@@ -1,15 +1,13 @@
-.library-page { padding-top: 32px; padding-bottom: 100px; min-height: 70vh; }
 .library-intro { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding: 38px; background: #1b1b1d; border-radius: 16px; }
 .library-intro h1 { margin: 0; font-size: clamp(2.5rem, 4.2vw, 4rem); letter-spacing: -.05em; line-height: 1; }
 .library-intro h1 span { color: var(--accent); }
 .library-intro > div > p:last-child { color: #c1bfc1; margin: 16px 0 0; }
-.search-form { display: flex; width: min(100%, 300px); border: 1px solid #4a4a4e; border-radius: 10px; background: #252528; }
+.search-form { width: min(100%, 300px); border: 1px solid #4a4a4e; border-radius: 10px; background: #252528; }
 .search-form input { width: 100%; min-width: 0; padding: 14px; color: white; background: transparent; border: 0; outline: 0; }
 .search-form input::placeholder { color: #b6b5b8; }
 .search-form:focus-within { outline: 3px solid var(--accent); outline-offset: 4px; }
 .search-form button { padding: 0 14px; color: white; background: transparent; border: 0; cursor: pointer; }
-.search-form svg { width: 20px; height: 20px; }
-.library-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); align-items: start; gap: 28px; margin-top: 28px; }
+.library-layout { grid-template-columns: 250px minmax(0, 1fr); gap: 28px; }
 .filters { background: var(--surface); border: 1px solid #29292c; border-radius: 14px; padding: 23px; }
 .filter-heading { color: #c6c3c5; margin: 0 0 18px; }
 .filter-list { display: grid; gap: 7px; }
@@ -24,10 +22,10 @@
 .catalogue-heading { min-height: 30px; margin: 0 0 18px; align-items: center; }
 .catalogue-heading h2 { margin: 0; font-size: 1.05rem; }
 .catalogue-heading p { margin: 0; color: #c0bec0; font-size: .84rem; }
-.book-grid { @apply grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.book-card { min-width: 0; background: var(--surface); border: 1px solid #2b2b2f; border-radius: 14px; padding: 14px; }
-.book-image { height: 220px; position: relative; display: flex; justify-content: center; align-items: center; padding: 14px; border-radius: 9px; background: var(--raised); }
-.book-image img { max-height: 100%; max-width: 100%; object-fit: contain; box-shadow: 0 5px 20px #0006; }
+.book-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.book-card { background: var(--surface); border: 1px solid #2b2b2f; border-radius: 14px; padding: 14px; }
+.book-image { height: 220px; padding: 14px; border-radius: 9px; background: var(--raised); }
+.book-image img { box-shadow: 0 5px 20px #0006; }
 .book-series, .book-level { position: absolute; top: 12px; z-index: 1; border-radius: 4px; padding: 5px 7px; font-size: .75rem; font-weight: 800; }
 .book-series { left: 12px; background: #e7a015; color: #211700; }
 .book-level { right: 12px; background: #080809; color: white; }
